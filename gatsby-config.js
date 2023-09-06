@@ -50,6 +50,14 @@ module.exports = {
       },
     },
 
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+          endpoint: 'https://gmail.us21.list-manage.com/subscribe/post?u=8d09b1a5fd8ae8fbcc4b1d50f&amp;id=fdb8ed6687&amp;f_id=0037dfe6f0', // string; add your MC list endpoint here; see instructions below
+          timeout: 3500, // number; the amount of time, in milliseconds, that you want to allow mailchimp to respond to your request before timing out. defaults to 3500
+      },
+  },
+
     /**
      * The following two plugins are required if you want to use Gatsby image
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-up-gatsby-image
