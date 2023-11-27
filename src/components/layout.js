@@ -75,7 +75,7 @@ const menusFooter = dataMenu.menus.nodes || [];
 
 
   return (
-    <div className="global-wrapper" data-is-root-path={isHomePage}>
+    <div className="global-wrapper1" data-is-root-path={isHomePage}>
       <Header header={header} menus={menus} currentMenuName={currentMenuName} />
       <main>{children}</main>
       <Footer footer={footer} currentMenuNameFooter={currentMenuNameFooter}  menusFooter={menusFooter} />

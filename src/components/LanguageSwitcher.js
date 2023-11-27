@@ -9,10 +9,14 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div>
-      <button className={i18n?.language == "en" ? 'active':''} onClick={() => changeLanguage('en')}>EN</button>
-      <button className={i18n?.language == "nl" ? 'active':''} onClick={() => changeLanguage('nl')}>NL</button>
-    </div>
+    <>
+     <li  className={i18n?.language == "en" ? 'active':''}>
+     <button onClick={() => changeLanguage('en')}>EN</button>
+     </li>
+      <li className={i18n?.language == "nl" ? 'active':''}>
+      <button onClick={() => changeLanguage('nl')}>NL</button>
+      </li>
+    </>
   );
 };
 

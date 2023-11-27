@@ -83,6 +83,7 @@ query NewQuery($language: LanguageCodeFilterEnum = EN) {
       title
       contactUs {
         address
+        addressLink
         contactFormHeading
         contactNumber
         emailAddress
@@ -241,11 +242,11 @@ query NewQuery($languages: [LanguageCodeEnum!] = EN) {
           email
           letsConnectText
           socialMedia {
-            icon {
-              mediaItemUrl
-            }
+            icon 
             url
           }
+          buildWithSite
+          footerCopyrightSite
         }
       }
     }
