@@ -242,7 +242,11 @@ query NewQuery($languages: [LanguageCodeEnum!] = EN) {
           email
           letsConnectText
           socialMedia {
+<<<<<<< Updated upstream
             icon 
+=======
+            icon
+>>>>>>> Stashed changes
             url
           }
           buildWithSite
