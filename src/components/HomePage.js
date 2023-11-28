@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'gatsby';
 import { GET_FAQS, GET_FRONT_PAGE, GET_TESTIMONIAL } from '../query/query';
 import addToMailchimp from 'gatsby-plugin-mailchimp'
-
+import OwlCarousel from "react-owl-carousel3"
 
 const options = {
   loop: true,
@@ -42,20 +42,16 @@ const partnerOptions = {
 
 const HomePage = () => {
   const { i18n } = useTranslation()
-  const [displayFaq, setDisplayFaq] = useState({ 1: true })
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState({ success: "", error: "" })
+  let faqs = [];
+  const [displayFaq, setDisplayFaq] = useState(Array(faqs.length).fill(false));
+ 
 
-  const handleClick = i => {
-    let newDisplayFaq = { ...displayFaq }
-    Object.keys(newDisplayFaq).map(key => {
-      if (key != i) {
-        newDisplayFaq[key] = false
-      }
-    })
-    newDisplayFaq[i] = !newDisplayFaq[i]
-    setDisplayFaq(newDisplayFaq)
-  }
+
+
+
+
 
   const handleSubscribe = async () => {
     addToMailchimp(email) // listFields are optional if you are only capturing the email address.
@@ -116,11 +112,21 @@ const HomePage = () => {
 
   if (loadingFaq) return <p>Loading...</p>
   if (errorFaq) return <p>Error: {errorFaq.message}</p>
-  const faqs = dataFaq.allFaqs.nodes
+ faqs = dataFaq.allFaqs.nodes
 
   if (loadingTestimonial) return <p>Loading...</p>
   if (errorTestimonaial) return <p>Error: {errorTestimonaial.message}</p>
   const allTestimonials = dataTestimonial.allTestimonials.nodes
+
+
+
+  const handleClick = (index) => {
+    const updatedDisplayFaq = [...displayFaq];
+    updatedDisplayFaq[index] = !updatedDisplayFaq[index];
+    setDisplayFaq(updatedDisplayFaq);
+  };
+
+
   return (
     <>
       <main>
@@ -302,39 +308,40 @@ const HomePage = () => {
                 <p>{homePage.home.section7Description}</p>
               </div>
               <div className="faq-wrapper">
-                {faqs.map((item, i) => (
-                  <>
-                    <div
-                      key={i}
-                      className={displayFaq[i] ? "faq-list active" : "faq-list"}
-                    >
-                      <h5
-                        className="faq-title"
-                        id={i}
-                        onClick={() => handleClick(i)}
-                      >
-                        <span>{item.title}</span>{" "}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="25"
-                          viewBox="0 0 24 25"
-                          fill="none"
-                        >
-                          <path
-                            d="M17.25 9.75L11.75 15.25L6.25 9.75"
-                            stroke="#6C6F93"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </h5>
-                      <div
-                        className="faq-content"
-                        dangerouslySetInnerHTML={{ __html: item.content }}
-                      ></div>
-                    </div>
-                  </>
-                ))}
+            
+      {faqs.map((item, i) => (
+        <div
+          key={i}
+          className={displayFaq[i] ? 'faq-list active' : 'faq-list'}
+        >
+          <h5 className="faq-title" id={i} onClick={() => handleClick(i)}>
+            <span>{item.title}</span>{' '}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+            >
+              <path
+                d="M17.25 9.75L11.75 15.25L6.25 9.75"
+                stroke="#6C6F93"
+                strokeWidth="2"
+              />
+            </svg>
+          </h5>
+          <div
+            className="faq-content"
+            style={{
+              maxHeight: displayFaq[i] ? '1000px' : '0',
+              overflow: 'hidden',
+              transition: '1s',
+            }}
+            dangerouslySetInnerHTML={{ __html: item.content }}
+          ></div>
+        </div>
+      ))}
+   
               </div>
               <div className="faq-btn-wrap">
                 <button className="btn btn-primary">

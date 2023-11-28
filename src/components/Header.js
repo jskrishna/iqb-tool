@@ -1,8 +1,28 @@
 import { Link } from "gatsby"
-import React from "react"
+import React, { useEffect } from "react"
 import LanguageSwitcher from "./LanguageSwitcher"
 
 const Header = ({ header, menus, currentMenuName }) => {
+
+useEffect(()=>{
+  document.getElementById('nav-icon').addEventListener('click', function() {
+    var navIcon = this; // 'this' refers to the element that triggered the event, in this case, the 'nav-icon' element
+    var body = document.body;
+
+    // Toggle the 'open' class on the 'nav-icon' element
+    navIcon.classList.toggle('open');
+
+    // Toggle the 'menu-open' class on the body element
+    body.classList.toggle('menu-open');
+});
+
+
+},[])
+
+
+
+
+
   return (
     <header className="main-header">
       <div className="container">
