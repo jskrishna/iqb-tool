@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { GET_ABOUT_PAGE, GET_TESTIMONIAL } from "../query/query"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import OwlCarousel from "react-owl-carousel3"
+import Loader from "./loader"
 
 const options = {
   loop: true,
@@ -58,7 +59,7 @@ const AboutPage = () => {
     },
   })
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loader/>
   if (error) return <div>Error fetching data: {error.message}</div>
   const aboutPage = data.pages.nodes[0] // Assuming only one page with the given slug
 

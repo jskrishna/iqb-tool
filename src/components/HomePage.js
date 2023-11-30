@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 import { GET_FAQS, GET_FRONT_PAGE, GET_TESTIMONIAL } from '../query/query';
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 import OwlCarousel from "react-owl-carousel3"
+import Loader from './loader';
 
 const options = {
   loop: true,
@@ -105,7 +106,7 @@ const HomePage = () => {
     },
   })
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader/>
   if (error) return <p>Error: {error.message}</p>
 
   const homePage = data.pages.nodes[0] // Assuming only one page with the given slug

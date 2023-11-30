@@ -7,6 +7,7 @@ import {
   GET_CONTACT_PAGE,
   SUBMIT_CONTACT_FORM,
 } from "../query/query"
+import Loader from "./loader"
 
 export default function ContactPage() {
   const { i18n } = useTranslation()
@@ -96,11 +97,11 @@ export default function ContactPage() {
     submitForm,
     { data: dataSubmit, loading: loadingSubmit, error: errorSubmit },
   ] = useMutation(SUBMIT_CONTACT_FORM)
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader/>
   if (error) return <p>Error: {error.message}</p>
   const ContactPage = data.pages.nodes[0]
 
-  if (data1.loading) return <p>Loading...</p>
+  if (data1.loading) return <Loader/>
   if (data1.error) return <p>Error: {data1.error.message}</p>
   const ContactForm = data1.data.form.fields.nodes
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import {  GET_PRIVACY_PAGE } from '../query/query';
+import Loader from './loader';
 
 
 const PrivacyPage = () => {
@@ -15,7 +16,7 @@ const PrivacyPage = () => {
 
 
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader/>
   if (error) return <div>Error fetching data: {error.message}</div>;
   const privacyPage = data.pages.nodes[0]; // Assuming only one page with the given slug
 

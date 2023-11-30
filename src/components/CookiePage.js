@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import {  GET_COOKIEPOLICY_PAGE } from '../query/query';
+import Loader from './loader';
 
 
 const CookiePage = () => {
@@ -15,7 +16,7 @@ const CookiePage = () => {
 
 
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader/>;
   if (error) return <div>Error fetching data: {error.message}</div>;
   const cookiePage = data.pages.nodes[0]; // Assuming only one page with the given slug
 
