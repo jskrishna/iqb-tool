@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'gatsby';
-import { GET_FAQS, GET_FRONT_PAGE, GET_TESTIMONIAL } from '../query/query';
-import addToMailchimp from 'gatsby-plugin-mailchimp'
+import React, { useState } from "react"
+import { useQuery, gql } from "@apollo/client"
+import { useTranslation } from "react-i18next"
+import { Link } from "gatsby"
+import { GET_FAQS, GET_FRONT_PAGE, GET_TESTIMONIAL } from "../query/query"
+import addToMailchimp from "gatsby-plugin-mailchimp"
 import OwlCarousel from "react-owl-carousel3"
 import Loader from './loader';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemButton,
+  AccordionItemHeading,
+  AccordionItemPanel,
+} from "react-accessible-accordion"
+import "react-accessible-accordion/dist/fancy-example.css"
 
 const options = {
   loop: true,
@@ -308,41 +316,58 @@ const HomePage = () => {
                 <h2 className="secHeading">{homePage.home.section7Heading2}</h2>
                 <p>{homePage.home.section7Description}</p>
               </div>
+              {/* <div className="faq-wrapper">
+                {faqs.map((item, i) => (
+                  <>
+                    <div
+                      key={i}
+                      className={displayFaq[i] ? "faq-list active" : "faq-list"}
+                    >
+                      <h5
+                        className="faq-title"
+                        id={i}
+                        onClick={() => handleClick(i)}
+                      >
+                        <span>{item.title}</span>{" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="25"
+                          viewBox="0 0 24 25"
+                          fill="none"
+                        >
+                          <path
+                            d="M17.25 9.75L11.75 15.25L6.25 9.75"
+                            stroke="#6C6F93"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                      </h5>
+                      <div
+                        className="faq-content"
+                        dangerouslySetInnerHTML={{ __html: item.content }}
+                      ></div>
+                    </div>
+                  </>
+                ))}
+              </div> */}
               <div className="faq-wrapper">
-            
-      {faqs.map((item, i) => (
-        <div
-          key={i}
-          className={displayFaq[i] ? 'faq-list active' : 'faq-list'}
-        >
-          <h5 className="faq-title" id={i} onClick={() => handleClick(i)}>
-            <span>{item.title}</span>{' '}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-            >
-              <path
-                d="M17.25 9.75L11.75 15.25L6.25 9.75"
-                stroke="#6C6F93"
-                strokeWidth="2"
-              />
-            </svg>
-          </h5>
-          <div
-            className="faq-content"
-            style={{
-              maxHeight: displayFaq[i] ? '1000px' : '0',
-              overflow: 'hidden',
-              transition: '1s',
-            }}
-            dangerouslySetInnerHTML={{ __html: item.content }}
-          ></div>
-        </div>
-      ))}
-   
+                <Accordion preExpanded={["a"]}>
+                  {faqs.map((item, i) => (
+                    <>
+                      <AccordionItem uuid={i==0?'a':i}>
+                        <AccordionItemHeading>
+                          <AccordionItemButton>
+                            <span>{item.title}</span>{" "}
+                          </AccordionItemButton>
+                        </AccordionItemHeading>
+                        <AccordionItemPanel
+                          dangerouslySetInnerHTML={{ __html: item.content }}
+                        ></AccordionItemPanel>
+                      </AccordionItem>
+                    </>
+                  ))}
+                </Accordion>
               </div>
               <div className="faq-btn-wrap">
                 <button className="btn btn-primary">

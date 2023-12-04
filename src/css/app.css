@@ -38,8 +38,8 @@
     font-family: var(--baseFont), sans-serif;
     color: rgba(var(--baseColor));
     font-size: var(--baseFontsize);
-    /* background: #f6f7f8; */
-    background: #f0f0f0;
+    background: #f6f7f8;
+    /* background: #f0f0f0; */
     margin: 0;
   }
   
@@ -628,7 +628,6 @@ h6 {
     border-radius: 8px;
     background: #FFF;
     box-shadow: 0px 1px 2px 0px rgba(113, 116, 152, 0.08);
-    padding: 12px 24px 12px 24px;
     transition: 300ms all;
     position: relative;
 }
@@ -652,10 +651,10 @@ h6 {
     overflow: inherit;
     opacity: 0;
     visibility: hidden; */
+    display: none;
     position: relative;
     z-index: 1;
-    display: none;
-    transition: 400ms all;
+    padding: 0px 24px 12px 24px;
 }
 
 .faq-list.active .faq-content {
@@ -687,6 +686,7 @@ h6 {
     cursor: pointer;
     position: relative;
     z-index: 1;
+    padding: 12px 24px 12px 24px;
 }
 
 .faq-list.active .faq-title, .faq-list:hover .faq-title {
@@ -722,6 +722,66 @@ h6 {
 
 .faq-sec .sec-header {
     max-width: 730px;
+}
+
+.faq-wrapper .accordion__item {
+    border: 0 !important;
+    border-radius: 8px;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(113, 116, 152, 0.08);
+    transition: 300ms all;
+}
+
+.faq-wrapper .accordion__button {
+    background-color: #fff;
+    color: rgba(var(--baseColor));
+    font-size: 14px;
+    font-weight: 500;
+    transition: 400ms all;
+    position: relative;
+}
+.faq-wrapper .accordion__heading {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+.faq-wrapper .accordion__button[aria-expanded="true"] {
+    background: linear-gradient(7deg, #0E0B3D 75.32%, #000 179.45%);
+    color: #fff;
+}
+
+.faq-wrapper .accordion__panel {
+    background: linear-gradient(7deg, #0E0B3D 75.32%, #000 179.45%);
+    color: #fff;
+    border-radius: 0 0 8px 8px;
+    padding-top:0;
+    /* animation-name: none; */
+    transition: 400ms all;
+}
+.faq-wrapper  .accordion__button:hover {
+background-color: transparent;
+}
+.faq-wrapper .accordion__button:before {
+    height: 8px;
+    width: 8px;
+    transform: rotate(-135deg);
+    right: 10px;
+    position: absolute;
+}
+
+.faq-wrapper .accordion__panel p {
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 27px;
+    margin: 0;
+}
+
+.faq-wrapper .accordion {
+    border: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .newsletter-sec .sec-header {

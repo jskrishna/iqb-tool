@@ -25,8 +25,8 @@ const FormsPage = () => {
 
 
 
-      <section className="solution-section">
-          <div className="">
+      <section className="solution-section form-p-solution-sec">
+          <div className="container">
             <div className="solution-inr">
               <div className="sec-header after-before-layer">
                 <h6>{formsPage.formsPage.section1Heading1}</h6>

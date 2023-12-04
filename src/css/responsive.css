@@ -55,6 +55,10 @@
         padding: 50px;
     }
 
+    .form-p-solution-sec .solution-inr {
+        padding: 20px 0;
+    }
+
     .secHeading {
         font-size: 35px;
         line-height: 46px;
