@@ -3,25 +3,22 @@ import React, { useEffect } from "react"
 import LanguageSwitcher from "./LanguageSwitcher"
 
 const Header = ({ header, menus, currentMenuName }) => {
+  useEffect(() => {
+    document.getElementById("nav-icon").addEventListener("click", function () {
+      var navIcon = this // 'this' refers to the element that triggered the event, in this case, the 'nav-icon' element
+      var body = document.body
+      // Toggle the 'open' class on the 'nav-icon' element
+      navIcon.classList.toggle("open")
+      // Toggle the 'menu-open' class on the body element
+      body.classList.toggle("menu-open")
+    })
+  }, [])
 
-useEffect(()=>{
-  document.getElementById('nav-icon').addEventListener('click', function() {
-    var navIcon = this; // 'this' refers to the element that triggered the event, in this case, the 'nav-icon' element
+  function removeBodyClass(){0
     var body = document.body;
+    body.classList.remove("menu-open");
 
-    // Toggle the 'open' class on the 'nav-icon' element
-    navIcon.classList.toggle('open');
-
-    // Toggle the 'menu-open' class on the body element
-    body.classList.toggle('menu-open');
-});
-
-
-},[])
-
-
-
-
+  }
 
   return (
     <header className="main-header">
@@ -29,19 +26,19 @@ useEffect(()=>{
         <div className="header-inr">
           <div className="navbar-left">
             <Link to="/">
-              <img src={header.logo.mediaItemUrl} />
+              <img src={header.logo.mediaItemUrl} alt="" />
             </Link>
           </div>
           {menus.map(
             menu =>
               menu.name === currentMenuName && (
-                <div key={menu.id} className="navbar-center">
+                <div key={menu.id + "zxy"} className="navbar-center">
                   <ul>
                     {menu.menuItems.nodes.map(item => (
-                      <li key={item.id}>
+                      <li key={item.id + "aab"}>
                         <Link
                           to={
-                            item.uri == "/nl/home/"
+                            item.uri === "/nl/home/"
                               ? "/"
                               : item.uri.replace(/^\/nl\//, "/")
                           }
@@ -114,12 +111,12 @@ useEffect(()=>{
               {menus.map(
                 menu =>
                   menu.name === currentMenuName && (
-                    <ul>
+                    <ul key={menu.id + "zyx"}>
                       {menu.menuItems.nodes.map(item => (
-                        <li key={item.id}>
+                        <li key={item.id + "aabc"} onClick={()=>removeBodyClass()}>
                           <Link
                             to={
-                              item.uri == "/nl/home/"
+                              item.uri === "/nl/home/"
                                 ? "/"
                                 : item.uri.replace(/^\/nl\//, "/")
                             }
@@ -135,16 +132,7 @@ useEffect(()=>{
                 <p className="language-label">Language</p>
                 <div className="language-toggle">
                   <ul className="login-language-menu">
-                    <li className="language-switcher lang-active">
-                      <a href="#!">
-                        <span>EN</span>
-                      </a>
-                    </li>
-                    <li className="language-switcher">
-                      <a href="#!">
-                        <span>NL</span>
-                      </a>
-                    </li>
+                    <LanguageSwitcher />
                   </ul>
                 </div>
               </div>

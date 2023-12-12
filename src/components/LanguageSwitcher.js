@@ -10,10 +10,10 @@ const LanguageSwitcher = () => {
 
   return (
     <>
-     <li  className={i18n?.language == "en" ? 'active':''}>
+     <li  className={i18n?.language === "en" ? 'active':''}>
      <button onClick={() => changeLanguage('en')}>EN</button>
      </li>
-      <li className={i18n?.language == "nl" ? 'active':''}>
+      <li className={i18n?.language === "nl" ? 'active':''}>
       <button onClick={() => changeLanguage('nl')}>NL</button>
       </li>
     </>

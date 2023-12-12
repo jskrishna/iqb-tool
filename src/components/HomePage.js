@@ -1,19 +1,11 @@
-import React, { useState } from "react"
-import { useQuery, gql } from "@apollo/client"
+import React, { useRef, useState } from "react"
+import { gsap } from "gsap"
+import { useQuery } from "@apollo/client"
 import { useTranslation } from "react-i18next"
-import { Link } from "gatsby"
 import { GET_FAQS, GET_FRONT_PAGE, GET_TESTIMONIAL } from "../query/query"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import OwlCarousel from "react-owl-carousel3"
-import Loader from './loader';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemButton,
-  AccordionItemHeading,
-  AccordionItemPanel,
-} from "react-accessible-accordion"
-import "react-accessible-accordion/dist/fancy-example.css"
+import Loader from "./loader"
 
 const options = {
   loop: true,
@@ -47,46 +39,87 @@ const partnerOptions = {
   dots: false,
   autoplayHoverPause: true,
   autoplay: false,
+  responsive: {
+    0: {
+      items: 2.5,
+    },
+
+    600: {
+      items: 4,
+      center: false,
+    },
+
+    1024: {
+      items: 5,
+    },
+  },
 }
 
 const HomePage = () => {
   const { i18n } = useTranslation()
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState({ success: "", error: "" })
-  let faqs = [];
-  const [displayFaq, setDisplayFaq] = useState(Array(faqs.length).fill(false));
- 
-
-
-
-
-
+  let faqs = []
 
   const handleSubscribe = async () => {
     addToMailchimp(email) // listFields are optional if you are only capturing the email address.
       .then(data => {
         // I recommend setting data to React state
         // but you can do whatever you want (including ignoring this `then()` altogether)
-        if (data.result == "success") {
+        if (data.result === "success") {
           let subscribe = { ...subscribed }
           subscribe.success = data.msg
           setSubscribed({ ...subscribe })
           setEmail("")
         }
-        if (data.result == "error") {
+        if (data.result === "error") {
           let subscribe = { ...subscribed }
           subscribe.error = data.msg
           setSubscribed({ ...subscribe })
         }
-        console.log(data)
       })
       .catch(error => {
-        console.log(error)
-        // unnecessary because Mailchimp only ever
-        // returns a 200 status code
-        // see below for how to handle errors
       })
-    console.log(email)
+  }
+
+  const [openAccordion, setOpenAccordion] = useState(0)
+  const accordionRefs = useRef([])
+
+  const handleAccordionClick = index => {
+    if (index === openAccordion) {
+      gsap.to(
+        accordionRefs.current[index].querySelector(".accordion__details"),
+        {
+          height: 0,
+          duration: 0.5,
+          ease: "power1.inOut",
+          onComplete: () => setOpenAccordion(null),
+        }
+      )
+    } else {
+      if (openAccordion !== null) {
+        gsap.to(
+          accordionRefs.current[openAccordion].querySelector(
+            ".accordion__details"
+          ),
+          {
+            height: 0,
+            duration: 0.5,
+            ease: "power1.inOut",
+          }
+        )
+      }
+      setOpenAccordion(index)
+      gsap.fromTo(
+        accordionRefs.current[index].querySelector(".accordion__details"),
+        { height: 0 },
+        {
+          height: "auto",
+          duration: 0.5,
+          ease: "power1.inOut",
+        }
+      )
+    }
   }
 
   const { loading, error, data } = useQuery(GET_FRONT_PAGE, {
@@ -114,27 +147,18 @@ const HomePage = () => {
     },
   })
 
-  if (loading) return <Loader/>
+  if (loading) return <Loader />
   if (error) return <p>Error: {error.message}</p>
 
   const homePage = data.pages.nodes[0] // Assuming only one page with the given slug
 
   if (loadingFaq) return <p>Loading...</p>
   if (errorFaq) return <p>Error: {errorFaq.message}</p>
- faqs = dataFaq.allFaqs.nodes
+  faqs = dataFaq.allFaqs.nodes
 
   if (loadingTestimonial) return <p>Loading...</p>
   if (errorTestimonaial) return <p>Error: {errorTestimonaial.message}</p>
   const allTestimonials = dataTestimonial.allTestimonials.nodes
-
-
-
-  const handleClick = (index) => {
-    const updatedDisplayFaq = [...displayFaq];
-    updatedDisplayFaq[index] = !updatedDisplayFaq[index];
-    setDisplayFaq(updatedDisplayFaq);
-  };
-
 
   return (
     <>
@@ -169,9 +193,8 @@ const HomePage = () => {
               <div className="partner-wrap">
                 <OwlCarousel className="partner-slider" {...partnerOptions}>
                   {homePage.home.section2BusinessImages.map((bimage, i) => (
-                    <div>
+                    <div key={i+'owl'}>
                       <img
-                        key={i}
                         src={bimage.image.mediaItemUrl}
                         alt=""
                         layout="fill"
@@ -193,7 +216,7 @@ const HomePage = () => {
               </div>
               <div className="image-content-inr">
                 {homePage.home.section4Questionnaire.map((item, i) => (
-                  <div className="image-content-wrapper" key={i}>
+                  <div className="image-content-wrapper" key={i+'abc'}>
                     <div className="content-wrap">
                       <h2>{item.questionnaireName}</h2>
                       <p>{item.questionnaireContent}</p>
@@ -278,7 +301,7 @@ const HomePage = () => {
             <div className="testimonial-wrapper">
               <OwlCarousel className="testimonial-slider" {...options}>
                 {allTestimonials.map((item, i) => (
-                  <div className="item" key={i}>
+                  <div className="item" key={i+'testi'}>
                     <div className="testimonial-item-inr">
                       <div
                         className="review-msg"
@@ -316,58 +339,40 @@ const HomePage = () => {
                 <h2 className="secHeading">{homePage.home.section7Heading2}</h2>
                 <p>{homePage.home.section7Description}</p>
               </div>
-              {/* <div className="faq-wrapper">
-                {faqs.map((item, i) => (
-                  <>
-                    <div
-                      key={i}
-                      className={displayFaq[i] ? "faq-list active" : "faq-list"}
-                    >
-                      <h5
-                        className="faq-title"
-                        id={i}
-                        onClick={() => handleClick(i)}
-                      >
-                        <span>{item.title}</span>{" "}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="25"
-                          viewBox="0 0 24 25"
-                          fill="none"
-                        >
-                          <path
-                            d="M17.25 9.75L11.75 15.25L6.25 9.75"
-                            stroke="#6C6F93"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </h5>
-                      <div
-                        className="faq-content"
-                        dangerouslySetInnerHTML={{ __html: item.content }}
-                      ></div>
-                    </div>
-                  </>
-                ))}
-              </div> */}
               <div className="faq-wrapper">
-                <Accordion preExpanded={["a"]}>
-                  {faqs.map((item, i) => (
-                    <>
-                      <AccordionItem uuid={i==0?'a':i}>
-                        <AccordionItemHeading>
-                          <AccordionItemButton>
-                            <span>{item.title}</span>{" "}
-                          </AccordionItemButton>
-                        </AccordionItemHeading>
-                        <AccordionItemPanel
-                          dangerouslySetInnerHTML={{ __html: item.content }}
-                        ></AccordionItemPanel>
-                      </AccordionItem>
-                    </>
-                  ))}
-                </Accordion>
+                {faqs.map((item, i) => (
+                  <div
+                  key={i+'faq'}
+                    className={`accordion__item ${
+                      openAccordion === i  ? "open" : ""
+                    }`}
+                    ref={el => (accordionRefs.current[i] = el)}
+                  >
+                    <div
+                      className="faq-title accordion__header"
+                      onClick={() => handleAccordionClick(i)}
+                    >
+                      <span>{item.title}</span>{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="25"
+                        viewBox="0 0 24 25"
+                        fill="none"
+                      >
+                        <path
+                          d="M17.25 9.75L11.75 15.25L6.25 9.75"
+                          stroke="#6C6F93"
+                          strokeWidth="2"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div
+                      className="faq-content accordion__details"
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    ></div>
+                  </div>
+                ))}
               </div>
               <div className="faq-btn-wrap">
                 <button className="btn btn-primary">

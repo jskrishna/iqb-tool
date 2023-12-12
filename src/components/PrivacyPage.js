@@ -1,12 +1,11 @@
 import React from "react"
-import { useQuery, gql } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { useTranslation } from "react-i18next"
 import { GET_PRIVACY_PAGE } from "../query/query"
 import Loader from "./loader"
 
 const PrivacyPage = () => {
   const { i18n } = useTranslation()
-  console.log(i18n.language)
   const { loading, error, data } = useQuery(GET_PRIVACY_PAGE, {
     variables: {
       language: i18n.language?.toUpperCase(), // Adjust to match your GraphQL enum format

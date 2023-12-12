@@ -12,22 +12,6 @@
         font-size: 14px;
     }
 
-    /* .banner-left h1 {
-        font-size: 50px;
-        line-height: 61px;
-    } */
-    /* .secHeading {
-        font-size: 38px;
-        line-height: 51px;
-    } */
-    /* .banner-left p, .sec-header p, .content-wrap p {
-        font-size: 16px;
-        line-height: 28px;
-    } */
-    /* .content-wrap h2 {
-        font-size: 33px;
-        line-height: 43px;
-    } */
 }
 
 @media (max-width: 1450px) {
@@ -92,6 +76,28 @@
 
     .testimonial-wrapper {
         padding-top: 20px;
+    }
+    .contact-page-inr {
+        padding: 0 40px;
+        gap: 25px;
+    }
+
+    .contact-right-inr>div {
+        padding: 40px;
+    }
+    .contact-right-inr h3 {
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 30px;
+    }
+    .address-link a {
+        gap: 10px;
+        font-size: 25px;
+        line-height: 35px;
+    }
+    .address-link a span {
+        width: 54px;
+        height: 54px;
     }
 }
 
@@ -266,9 +272,44 @@
         margin: 35px 0;
         flex-wrap: wrap;
     }
+    .contact-page-inr {
+        padding: 0px;
+        gap: 20px;
+    }
 }
 
 @media(max-width:767px) {
+    .contact-right-inr h3 {
+        font-size: 25px;
+        line-height: 32px;
+        margin-bottom: 25px;
+        padding: 0;
+    }
+    .contact-right-inr>div {
+        padding: 30px 20px;
+    }
+    .contact-page-left .address-link {
+        max-width: 290px;
+        margin: 0 auto;
+    }
+    .address-link a {
+        font-size: 22px;
+        line-height: 32px;
+    }
+    .contact-page-inr {
+        gap: 30px;
+        max-width: 500px;
+        margin: 40px auto 0;
+        flex-direction: column-reverse;
+    }
+    .contact-page-inr>div {
+        width: 100%;
+    }
+    .business-partner {
+        margin-top: -70px;
+        overflow: hidden;
+    }
+
     h6 {
         font-size: 12px;
     }
@@ -341,7 +382,7 @@
 
     .faq-inr {
         border-radius: 0px;
-        padding: 0px;
+        padding: 50px 0px;
         background: transparent;
     }
 
@@ -386,7 +427,7 @@
 
     .upon-inr {
         border-radius: 20px;
-        padding: 25px 25px 0;
+        padding: 20px 20px 0;
     }
 
     .upon-section {
@@ -475,9 +516,11 @@
         padding: 10px 16px 10px 16px;
     }
 
-    .faq-title {
+    .faq-wrapper .accordion__header {
         font-size: 15px;
         line-height: 26px;
+        padding: 10px 18px 10px 18px;
+
     }
 
     .faq-wrapper {
@@ -485,7 +528,7 @@
     }
 
     .faq-content {
-        transition: initial;
+        padding: 0 18px;
     }
 
     .faq-list.active .faq-content {
@@ -515,5 +558,17 @@
     .after-before-layer:after {
         bottom: -20px;
         left: 10px;
+    }
+
+    .testimonial-sec .owl-dots {
+        margin-top: 25px;
+    }
+
+    .owl-carousel.partner-slider {
+        width: 105%;
+    }
+
+    .partner-slider img {
+        max-width: 150px;
     }
 }

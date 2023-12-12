@@ -1,12 +1,11 @@
 import React from "react"
-import { useQuery, gql } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { useTranslation } from "react-i18next"
 import { GET_COOKIEPOLICY_PAGE } from "../query/query"
 import Loader from "./loader"
 
 const CookiePage = () => {
   const { i18n } = useTranslation()
-  console.log(i18n.language)
   const { loading, error, data } = useQuery(GET_COOKIEPOLICY_PAGE, {
     variables: {
       language: i18n.language?.toUpperCase(), // Adjust to match your GraphQL enum format

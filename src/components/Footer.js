@@ -9,7 +9,7 @@ const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
         <div className="footer-top">
           <div className="footer-box footer-logo">
             <Link to={"/"}>
-              <img src={footer.logo.mediaItemUrl} />
+              <img src={footer.logo.mediaItemUrl} alt="" />
             </Link>
             <p>{footer.belowLogoContent}</p>
           </div>
@@ -22,7 +22,7 @@ const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
                             <li key={item.id}>
                               <Link
                                 to={
-                                  item.uri == "/nl/home/"
+                                  item.uri === "/nl/home/"
                                     ? "/"
                                     : item.uri.replace(/^\/nl\//, "/")
                                 }
@@ -71,7 +71,7 @@ const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
           <div className="footer-bottom">
           <p>
           © {date.getFullYear()}{" "}
-            <a href="#" className="decoration">
+            <a href="/" className="decoration">
             {footer.footerCopyrightSite}
             </a>{" "}
             |  {footer.copyrightText}

@@ -79,7 +79,6 @@ export default function ContactPage() {
   }
 
   useEffect(() => {
-    console.log(formData)
   }, [formData])
 
   const { loading, error, data } = useQuery(GET_CONTACT_PAGE, {
@@ -87,29 +86,28 @@ export default function ContactPage() {
       language: i18n.language?.toUpperCase(), // Adjust to match your GraphQL enum format
     },
   })
-
+console.log(data);
   const data1 = useQuery(GET_CONTACT_FORM, {
     variables: {
-      id: i18n.language?.toUpperCase() == "NL" ? "2" : "1", // Adjust to match your GraphQL enum format
+      id: i18n.language?.toUpperCase() === "NL" ? "2" : "1", // Adjust to match your GraphQL enum format
     },
   })
   const [
     submitForm,
-    { data: dataSubmit, loading: loadingSubmit, error: errorSubmit },
+    // { data: dataSubmit, loading: loadingSubmit, error: errorSubmit },
   ] = useMutation(SUBMIT_CONTACT_FORM)
-  if (loading) return <Loader/>
+  if (loading) return <Loader />
   if (error) return <p>Error: {error.message}</p>
   const ContactPage = data.pages.nodes[0]
 
-  if (data1.loading) return <Loader/>
+  if (data1.loading) return <Loader />
   if (data1.error) return <p>Error: {data1.error.message}</p>
   const ContactForm = data1.data.form.fields.nodes
 
-  const onSubmit = async () => {
+  const onSubmit = async (event) => {
+    event.preventDefault();
     let form = document.getElementById("myForm")
-
     let checkValidations = checkValidation(ContactForm, formData, setError)
-    console.log(checkValidations)
     if (checkValidations) {
       let msgNew = msg
       try {
@@ -121,16 +119,12 @@ export default function ContactPage() {
             },
           },
         })
-        console.log(result)
-
         if (result.data.submitForm.success) {
           form.reset()
           msgNew.success = "Message sent successfully!"
-          console.log("Message sent successfully!")
         }
       } catch (error) {
         msgNew.error = "Error submitting form!"
-        console.error("Error submitting form:", error)
       }
       setMsg(msgNew)
     }
@@ -237,7 +231,7 @@ export default function ContactPage() {
               <div className="contact-right-inr">
                 <div>
                   <h3>{ContactPage.contactUs.contactFormHeading}</h3>
-                  <form id="myForm" action="javascript:void(0)">
+                  <form id="myForm" onSubmit={(e)=>onSubmit(e)}>
                     {ContactForm.map(field => (
                       <div className="form-group" key={field.fieldId}>
                         {field.__typename === "TextboxField" ||
@@ -272,7 +266,7 @@ export default function ContactPage() {
                           </>
                         ) : field.__typename === "SubmitField" ? (
                           <button
-                            onClick={() => onSubmit()}
+                            onClick={(e) => onSubmit(e)}
                             type="submit"
                             className="btn btn-primary w-100"
                           >

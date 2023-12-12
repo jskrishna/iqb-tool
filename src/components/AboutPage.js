@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useQuery, gql } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { useTranslation } from "react-i18next"
 import { GET_ABOUT_PAGE, GET_TESTIMONIAL } from "../query/query"
 import addToMailchimp from "gatsby-plugin-mailchimp"
@@ -14,6 +14,20 @@ const options = {
   dots: true,
   autoplayHoverPause: true,
   autoplay: false,
+  responsive: {
+    0: {
+      items: 1,
+    },
+
+    600: {
+      items: 2,
+      center: false,
+    },
+
+    1024: {
+      items: 3,
+    },
+  },
 }
 
 const AboutPage = () => {
@@ -23,25 +37,22 @@ const AboutPage = () => {
   const handleSubscribe = async () => {
     addToMailchimp(email)
       .then(data => {
-        if (data.result == "success") {
+        if (data.result === "success") {
           let subscribe = { ...subscribed }
           subscribe.success = data.msg
           subscribe.error = ""
           setSubscribed({ ...subscribe })
           setEmail("")
         }
-        if (data.result == "error") {
+        if (data.result === "error") {
           let subscribe = { ...subscribed }
           subscribe.error = data.msg
           subscribe.success = ""
           setSubscribed({ ...subscribe })
         }
-        console.log(data)
       })
       .catch(error => {
-        console.log(error)
       })
-    console.log(email)
   }
   const { loading, error, data } = useQuery(GET_ABOUT_PAGE, {
     variables: {
@@ -59,7 +70,7 @@ const AboutPage = () => {
     },
   })
 
-  if (loading) return <Loader/>
+  if (loading) return <Loader />
   if (error) return <div>Error fetching data: {error.message}</div>
   const aboutPage = data.pages.nodes[0] // Assuming only one page with the given slug
 
@@ -91,10 +102,12 @@ const AboutPage = () => {
                 <img
                   className="img-1"
                   src={aboutPage.aboutUs.section2Image1.mediaItemUrl}
+                  alt=""
                 />
                 <img
                   className="img-2"
                   src={aboutPage.aboutUs.section2Image2.mediaItemUrl}
+                  alt=""
                 />
               </div>
             </div>
@@ -112,7 +125,7 @@ const AboutPage = () => {
             {aboutPage.aboutUs.section3AllFeature.map((feature, i) => (
               <div key={i} className="useful-item">
                 <div className="useful-item-inr">
-                  <img src={feature.icon.mediaItemUrl} />
+                  <img src={feature.icon.mediaItemUrl} alt="" />
                   <p>{feature.description}</p>
                 </div>
               </div>

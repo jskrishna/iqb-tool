@@ -1,11 +1,8 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import parse from "html-react-parser"
 import client from "../apollo/client";
 import { GET_FOOTER_OPTIONS, GET_HEADER_OPTIONS, GET_MENUS } from "../query/query";
 import { useQuery } from "@apollo/client";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -69,7 +66,6 @@ const footer = dataFooter.allFooter.nodes[0].footer;
 if (loadingMenu) return <p>Loading...</p>;
 if (errorMenu) return <p>Error: {errorMenu.message}</p>;
 const currentMenuNameFooter = footerMenuNames[i18n.language];
-console.log(dataMenu);
 const menusFooter = dataMenu.menus.nodes || [];
 
 
