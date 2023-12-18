@@ -291,6 +291,8 @@ query MyQuery {
           logo {
             mediaItemUrl
           }
+          loginButtonText
+          loginButtonUrl
         }
       }
     }

@@ -26,6 +26,10 @@
 }
 
 @media (max-width: 1140px) {
+    .content-page-inr {
+        border-radius: 15px;
+        padding: 40px;
+    }
     .banner-left h1 {
         font-size: 43px;
         line-height: 54px;
@@ -170,10 +174,11 @@
 
     .language-wrap {
         border-top: 1px solid rgba(var(--baseColor), 0.10);
-        padding-top: 20px;
+        padding-top: 15px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 30px;
     }
 
     .res-nav-wrap>ul a {
@@ -520,11 +525,11 @@
         font-size: 15px;
         line-height: 26px;
         padding: 10px 18px 10px 18px;
-
     }
 
     .faq-wrapper {
         gap: 10px;
+        margin-top: 30px;
     }
 
     .faq-content {
@@ -570,5 +575,9 @@
 
     .partner-slider img {
         max-width: 150px;
+    }
+    .content-page-inr {
+        border-radius: 15px;
+        padding: 25px;
     }
 }

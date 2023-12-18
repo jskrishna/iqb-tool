@@ -1,14 +1,17 @@
 import { Link } from "gatsby"
 import React from "react"
+import { useTranslation } from 'react-i18next';
+
 
 const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
+  const { i18n } = useTranslation();
   const date = new Date()
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-top">
           <div className="footer-box footer-logo">
-            <Link to={"/"}>
+          <Link to={`/`}>
               <img src={footer.logo.mediaItemUrl} alt="" />
             </Link>
             <p>{footer.belowLogoContent}</p>
@@ -61,7 +64,7 @@ const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
               <ul className="social-menu">
                 {footer.socialMedia.map((social, i) => (
                   <li key={i}>
-                    <a href={social.url} dangerouslySetInnerHTML={{__html: social.icon}}>
+                    <a target={"_blank"} href={social.url} dangerouslySetInnerHTML={{__html: social.icon}}>
                     </a>
                   </li>
                 ))}

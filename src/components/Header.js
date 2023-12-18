@@ -1,8 +1,10 @@
-import { Link } from "gatsby"
-import React, { useEffect } from "react"
-import LanguageSwitcher from "./LanguageSwitcher"
+import { Link } from "gatsby";
+import React, { useEffect } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from 'react-i18next';
 
 const Header = ({ header, menus, currentMenuName }) => {
+  const { i18n } = useTranslation();
   useEffect(() => {
     document.getElementById("nav-icon").addEventListener("click", function () {
       var navIcon = this // 'this' refers to the element that triggered the event, in this case, the 'nav-icon' element
@@ -12,9 +14,19 @@ const Header = ({ header, menus, currentMenuName }) => {
       // Toggle the 'menu-open' class on the body element
       body.classList.toggle("menu-open")
     })
+
+
+    const currentUrl = new URL(window.location.href);
+ 
+    
+    window.history.replaceState({}, '', currentUrl.toString());
+    window.history.replaceState({}, '', currentUrl.pathname);
+
+
+
   }, [])
 
-  function removeBodyClass(){0
+  function removeBodyClass(){
     var body = document.body;
     body.classList.remove("menu-open");
 
@@ -25,7 +37,7 @@ const Header = ({ header, menus, currentMenuName }) => {
       <div className="container">
         <div className="header-inr">
           <div className="navbar-left">
-            <Link to="/">
+            <Link to={`/`}>
               <img src={header.logo.mediaItemUrl} alt="" />
             </Link>
           </div>
@@ -56,8 +68,8 @@ const Header = ({ header, menus, currentMenuName }) => {
               <LanguageSwitcher />
             </ul>
             <div className="login-btn-wrap">
-              <a className="btn btn-primary login-btn" href="/signin">
-                Login
+              <a className="btn btn-primary login-btn" href={header.loginButtonUrl}>
+              {header.loginButtonText}
               </a>
             </div>
             <div className="sideToggle">
@@ -132,7 +144,7 @@ const Header = ({ header, menus, currentMenuName }) => {
                 <p className="language-label">Language</p>
                 <div className="language-toggle">
                   <ul className="login-language-menu">
-                    <LanguageSwitcher />
+                  <LanguageSwitcher />
                   </ul>
                 </div>
               </div>

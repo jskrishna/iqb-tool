@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 import Header from "./Header";
 import Footer from "./Footer";
+import Loader from "./loader";
 
 const Layout = ({ isHomePage, children }) => {
   const menuNames = {
@@ -37,7 +38,7 @@ const Layout = ({ isHomePage, children }) => {
     },
   });
 
-  if (loading) return ;
+  if (loading) return <Loader/>;
   if (error) return <p>Error: {error.message}</p>;
 
 
@@ -45,7 +46,7 @@ const Layout = ({ isHomePage, children }) => {
   const menus = data.menus.nodes || [];
 
 
-  if (loadingHeader) return ;
+  if (loadingHeader) return <Loader/>;;
   if (errorHeader) return <p>Error: {errorHeader.message}</p>;
 const header = dataHeader.allHeader.nodes[0].header;
 
@@ -58,12 +59,12 @@ const footerMenuNames = {
 };
 
 
-if (loadingFooter) return <p>Loading...</p>;
+if (loadingFooter) return <Loader/>;;
 if (errorFooter) return <p>Error: {errorFooter.message}</p>;
 
 const footer = dataFooter.allFooter.nodes[0].footer;
 
-if (loadingMenu) return <p>Loading...</p>;
+if (loadingMenu) return <Loader/>;
 if (errorMenu) return <p>Error: {errorMenu.message}</p>;
 const currentMenuNameFooter = footerMenuNames[i18n.language];
 const menusFooter = dataMenu.menus.nodes || [];

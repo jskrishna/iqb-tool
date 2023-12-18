@@ -1086,3 +1086,9 @@ textarea.form-control {
 .loader-wrap img {
     width: 50px;
 }
+
+.content-page-inr {
+    background: linear-gradient(280deg,#f7f9fc 67.03%,#f7f9fc 0,#fff 91.23%);
+    border-radius: 25px;
+    padding: 70px;
+}

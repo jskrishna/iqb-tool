@@ -5,8 +5,16 @@ const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('lang', lng);
+    
+    window.history.replaceState({}, '', currentUrl.toString());
+    window.history.replaceState({}, '', currentUrl.pathname);
+
     i18n.changeLanguage(lng);
   };
+
+
 
   return (
     <>

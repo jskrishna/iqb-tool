@@ -1,10 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-
+const urlParams = new URLSearchParams(window.location.search);
+const defaultLanguage = urlParams.get('lang') || 'en';
 
 i18n.use(initReactI18next).init({
-  lng: 'en', // Set the default language
+  lng: defaultLanguage, // Set the default language
   fallbackLng: 'en', // Fallback language in case translation is missing
   resources: {
     en: {
