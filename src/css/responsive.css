@@ -8,7 +8,7 @@
     }
 
     .navbar-center>ul>li>a {
-        padding: 6px 18px;
+        padding: 21px 18px;
         font-size: 14px;
     }
 
@@ -112,6 +112,9 @@
 }
 
 @media (max-width: 1024px) {
+    .header-inr {
+        padding: 15px 0;
+    }
     .navbar-right ul.login-language-menu {
         display: none;
     }
@@ -179,6 +182,21 @@
         align-items: center;
         justify-content: space-between;
         margin-top: 30px;
+    }
+
+    .res-nav-wrap>ul li> span {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .res-nav-wrap>ul li> ul {
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        background: #F7F9FC;
+        border-radius: 10px;
+        margin-top: 20px;
     }
 
     .res-nav-wrap>ul a {

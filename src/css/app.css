@@ -43,6 +43,14 @@ body {
     margin: 0;
 }
 
+main {
+    min-height: calc(100vh - 360px);
+}
+
+a, button {
+    outline: none;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -127,7 +135,7 @@ a label {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 0;
+    /* padding: 15px 0; */
 }
 
 .navbar-left a {
@@ -185,17 +193,58 @@ a label {
     gap: 10px;
 }
 
-.navbar-center>ul>li>a {
-    padding: 8px 20px;
+.navbar-center>ul>li {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center>ul>li>a, .navbar-center>ul>li>ul>li>a {
+    padding: 23px 20px;
     color: rgba(14, 11, 61, 0.75);
     font-weight: 500;
     border-radius: 50px;
     font-size: 14px;
+    display: block;
+}
+
+.navbar-center>ul>li>ul>li>a {
+    padding: 10px 20px;
 }
 
 .navbar-center>ul>li>a:hover {
     background: #F7F9FC;
     color: rgba(var(--themeColor), 0.88);
+}
+
+.navbar-center>ul>li>ul>li>a:hover {
+    color: rgba(var(--themeColor), 0.88);
+}
+
+.subMenu {
+    visibility: hidden;
+    opacity: 0;
+    min-width: 130px;
+    position: absolute;
+    transition: all 0.3s ease;
+    left: 0;
+    border-radius: 5px;
+    background: #F7F9FC;
+    top: 150%;
+}
+
+.navbar-center>ul>li:hover .subMenu{
+    visibility: visible;
+  opacity: 1;
+  top: 100%;
+}
+
+.navbar-center>ul>li>svg {
+transition: 300ms all;
+}
+
+.navbar-center>ul>li:hover svg {
+    transform: rotate(180deg);
 }
 
 .login-btn {
@@ -896,7 +945,7 @@ h6 {
 
 .icon-list li:before {
     content: "";
-    background: url(https://patidarparivar.com/wp-content/uploads/2023/09/list-icon.svg)no-repeat center left/contain;
+    background: url(/wp-content/uploads/2023/09/list-icon.svg)no-repeat center left/contain;
     position: absolute;
     width: 25px;
     height: 25px;

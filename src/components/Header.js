@@ -1,10 +1,10 @@
-import { Link } from "gatsby";
-import React, { useEffect } from "react";
-import LanguageSwitcher from "./LanguageSwitcher";
-import { useTranslation } from 'react-i18next';
+import { Link } from "gatsby"
+import React, { useEffect } from "react"
+import LanguageSwitcher from "./LanguageSwitcher"
+import { useTranslation } from "react-i18next"
 
 const Header = ({ header, menus, currentMenuName }) => {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
   useEffect(() => {
     document.getElementById("nav-icon").addEventListener("click", function () {
       var navIcon = this // 'this' refers to the element that triggered the event, in this case, the 'nav-icon' element
@@ -15,23 +15,21 @@ const Header = ({ header, menus, currentMenuName }) => {
       body.classList.toggle("menu-open")
     })
 
+    const currentUrl = new URL(window.location.href)
 
-    const currentUrl = new URL(window.location.href);
- 
-    
-    window.history.replaceState({}, '', currentUrl.toString());
-    window.history.replaceState({}, '', currentUrl.pathname);
-
-
-
+    window.history.replaceState({}, "", currentUrl.toString())
+    window.history.replaceState({}, "", currentUrl.pathname)
   }, [])
 
-  function removeBodyClass(){
-    var body = document.body;
-    body.classList.remove("menu-open");
-
+  function removeBodyClass(param) {
+    if (!param) {
+      var body = document.body
+      body.classList.remove("menu-open")
+    }
   }
-
+  const getChildren = (menuItems, parentId) => {
+    return menuItems.filter(item => item.parentId === parentId)
+  }
   return (
     <header className="main-header">
       <div className="container">
@@ -46,19 +44,73 @@ const Header = ({ header, menus, currentMenuName }) => {
               menu.name === currentMenuName && (
                 <div key={menu.id + "zxy"} className="navbar-center">
                   <ul>
-                    {menu.menuItems.nodes.map(item => (
-                      <li key={item.id + "aab"}>
-                        <Link
-                          to={
-                            item.uri === "/nl/home/"
-                              ? "/"
-                              : item.uri.replace(/^\/nl\//, "/")
-                          }
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
+                    {menu.menuItems.nodes.map(
+                      item =>
+                        !item.parentId && (
+                          <li
+                            key={item.id + "aab"}
+                            className={`${
+                              getChildren(menu.menuItems.nodes, item.id).length
+                                ? "has-parent"
+                                : ""
+                            }`}
+                          >
+                            <Link
+                              to={
+                                item.uri === "/nl/home/"
+                                  ? "/"
+                                  : item.uri.replace(/^\/nl\//, "/")
+                              }
+                            >
+                              {item.label}
+                            </Link>
+                            {getChildren(menu.menuItems.nodes, item.id)
+                              .length ? (
+                              <svg
+                                class="icon"
+                                width="14"
+                                height="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512"
+                              >
+                                <path
+                                  d="M151.5 347.8L3.5 201c-4.7-4.7-4.7-12.3 0-17l19.8-19.8c4.7-4.7 12.3-4.7 17 0L160 282.7l119.7-118.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17l-148 146.8c-4.7 4.7-12.3 4.7-17 0z"
+                                  fill="currentColor"
+                                ></path>
+                              </svg>
+                            ) : (
+                              ""
+                            )}
+                            {getChildren(menu.menuItems.nodes, item.id)
+                              .length ? (
+                              <ul className="subMenu">
+                                {getChildren(menu.menuItems.nodes, item.id).map(
+                                  innerItem => (
+                                    <li>
+                                      {" "}
+                                      {console.log(innerItem)}{" "}
+                                      <Link
+                                        to={
+                                          innerItem.uri === "/nl/home/"
+                                            ? "/"
+                                            : innerItem.uri.replace(
+                                                /^\/nl\//,
+                                                "/"
+                                              )
+                                        }
+                                      >
+                                        {innerItem.label}
+                                      </Link>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            ) : (
+                              ""
+                            )}
+                          </li>
+                        )
+                    )}
                   </ul>
                 </div>
               )
@@ -68,8 +120,11 @@ const Header = ({ header, menus, currentMenuName }) => {
               <LanguageSwitcher />
             </ul>
             <div className="login-btn-wrap">
-              <a className="btn btn-primary login-btn" href={header.loginButtonUrl}>
-              {header.loginButtonText}
+              <a
+                className="btn btn-primary login-btn"
+                href={header.loginButtonUrl}
+              >
+                {header.loginButtonText}
               </a>
             </div>
             <div className="sideToggle">
@@ -124,19 +179,75 @@ const Header = ({ header, menus, currentMenuName }) => {
                 menu =>
                   menu.name === currentMenuName && (
                     <ul key={menu.id + "zyx"}>
-                      {menu.menuItems.nodes.map(item => (
-                        <li key={item.id + "aabc"} onClick={()=>removeBodyClass()}>
-                          <Link
-                            to={
-                              item.uri === "/nl/home/"
-                                ? "/"
-                                : item.uri.replace(/^\/nl\//, "/")
-                            }
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
+                      {menu.menuItems.nodes.map(
+                        item =>
+                          !item.parentId && (
+                            <li
+                              key={item.id + "aabc"}
+                              onClick={() =>
+                                removeBodyClass(
+                                  getChildren(menu.menuItems.nodes, item.id)
+                                    .length
+                                )
+                              }
+                            >
+                              <span>
+                                <Link
+                                  to={
+                                    item.uri === "/nl/home/"
+                                      ? "/"
+                                      : item.uri.replace(/^\/nl\//, "/")
+                                  }
+                                >
+                                  {item.label}
+                                </Link>
+                                {getChildren(menu.menuItems.nodes, item.id)
+                                  .length ? (
+                                  <svg
+                                    class="icon"
+                                    width="14"
+                                    height="16"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 320 512"
+                                  >
+                                    <path
+                                      d="M151.5 347.8L3.5 201c-4.7-4.7-4.7-12.3 0-17l19.8-19.8c4.7-4.7 12.3-4.7 17 0L160 282.7l119.7-118.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17l-148 146.8c-4.7 4.7-12.3 4.7-17 0z"
+                                      fill="currentColor"
+                                    ></path>
+                                  </svg>
+                                ) : (
+                                  ""
+                                )}
+                              </span>
+                              {getChildren(menu.menuItems.nodes, item.id)
+                                .length ? (
+                                <ul>
+                                  {getChildren(
+                                    menu.menuItems.nodes,
+                                    item.id
+                                  ).map(innerItem => (
+                                    <li onClick={() => removeBodyClass()}>
+                                      <Link
+                                        to={
+                                          innerItem.uri === "/nl/home/"
+                                            ? "/"
+                                            : innerItem.uri.replace(
+                                                /^\/nl\//,
+                                                "/"
+                                              )
+                                        }
+                                      >
+                                        {innerItem.label}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                ""
+                              )}
+                            </li>
+                          )
+                      )}
                     </ul>
                   )
               )}
@@ -144,7 +255,7 @@ const Header = ({ header, menus, currentMenuName }) => {
                 <p className="language-label">Language</p>
                 <div className="language-toggle">
                   <ul className="login-language-menu">
-                  <LanguageSwitcher />
+                    <LanguageSwitcher />
                   </ul>
                 </div>
               </div>

@@ -110,7 +110,7 @@ const HomePage = () => {
         )
       }
       setOpenAccordion(index)
-      gsap.fromTo(
+      gsap.fromTo (
         accordionRefs.current[index].querySelector(".accordion__details"),
         { height: 0 },
         {
@@ -122,7 +122,7 @@ const HomePage = () => {
     }
   }
 
-  const { loading, error, data } = useQuery(GET_FRONT_PAGE, {
+  const { loading, error, data } = useQuery (GET_FRONT_PAGE, {
     variables: {
       language: i18n.language?.toUpperCase(), // Adjust to match your GraphQL enum format
     },
