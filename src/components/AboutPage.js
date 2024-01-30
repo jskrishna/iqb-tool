@@ -101,12 +101,12 @@ const AboutPage = () => {
               <div className="about-img-wrap">
                 <img
                   className="img-1"
-                  src={aboutPage.aboutUs.section2Image1.mediaItemUrl}
+                  src={aboutPage.aboutUs.section2Image1?.mediaItemUrl}
                   alt=""
                 />
                 <img
                   className="img-2"
-                  src={aboutPage.aboutUs.section2Image2.mediaItemUrl}
+                  src={aboutPage.aboutUs.section2Image2?.mediaItemUrl}
                   alt=""
                 />
               </div>
@@ -125,7 +125,7 @@ const AboutPage = () => {
             {aboutPage.aboutUs.section3AllFeature.map((feature, i) => (
               <div key={i} className="useful-item">
                 <div className="useful-item-inr">
-                  <img src={feature.icon.mediaItemUrl} alt="" />
+                  <img src={feature.icon?.mediaItemUrl} alt="" />
                   <p>{feature.description}</p>
                 </div>
               </div>
@@ -169,7 +169,7 @@ const AboutPage = () => {
                     <div className="author-d-wrap">
                       <div className="author-img">
                         <img
-                          src={item.featuredImage.node.mediaItemUrl}
+                          src={item.featuredImage.node?.mediaItemUrl}
                           alt=""
                           layout="fill"
                         />

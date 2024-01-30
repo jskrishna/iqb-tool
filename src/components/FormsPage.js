@@ -52,7 +52,7 @@ const FormsPage = () => {
                   </div>
                   <div className="image-wrap">
                     <img
-                      src={item.questionnaireImage.mediaItemUrl}
+                      src={item.questionnaireImage?.mediaItemUrl}
                       alt=""
                       layout="fill"
                     />

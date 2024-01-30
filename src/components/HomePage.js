@@ -147,22 +147,24 @@ const HomePage = () => {
     },
   })
 
-  if (loading) return <Loader />
+  // if (loading) return;
   if (error) return <p>Error: {error.message}</p>
 
-  const homePage = data.pages.nodes[0] // Assuming only one page with the given slug
+  const homePage = data?.pages.nodes[0] // Assuming only one page with the given slug
 
-  if (loadingFaq) return <p>Loading...</p>
+  // if (loadingFaq) return <p>Loading...</p>
   if (errorFaq) return <p>Error: {errorFaq.message}</p>
-  faqs = dataFaq.allFaqs.nodes
+  faqs = dataFaq?.allFaqs.nodes
 
-  if (loadingTestimonial) return <p>Loading...</p>
+  // if (loadingTestimonial) return <p>Loading...</p>
   if (errorTestimonaial) return <p>Error: {errorTestimonaial.message}</p>
-  const allTestimonials = dataTestimonial.allTestimonials.nodes
+  const allTestimonials = dataTestimonial?.allTestimonials.nodes
 
   return (
     <>
-      <main>
+   
+        {homePage ? 
+           <main>
         <section className="main-banner">
           <div className="container">
             <div className="banner-inr">
@@ -178,7 +180,7 @@ const HomePage = () => {
               </div>
               <div className="banner-right">
                 <img
-                  src={homePage.home.section1Image.mediaItemUrl}
+                  src={homePage.home.section1Image?.mediaItemUrl}
                   alt="homepage banner"
                   layout="fill"
                 />
@@ -195,7 +197,7 @@ const HomePage = () => {
                   {homePage.home.section2BusinessImages.map((bimage, i) => (
                     <div key={i+'owl'}>
                       <img
-                        src={bimage.image.mediaItemUrl}
+                        src={bimage.image?.mediaItemUrl}
                         alt=""
                         layout="fill"
                       />
@@ -239,7 +241,7 @@ const HomePage = () => {
                     </div>
                     <div className="image-wrap">
                       <img
-                        src={item.questionnaireImage.mediaItemUrl}
+                        src={item.questionnaireImage?.mediaItemUrl}
                         alt=""
                         layout="fill"
                       />
@@ -255,7 +257,7 @@ const HomePage = () => {
             <div
               className="upon-inr"
               style={{
-                backgroundImage: `url(${homePage.home.section5BackgroundImage.mediaItemUrl})`,
+                backgroundImage: `url(${homePage.home.section5BackgroundImage?.mediaItemUrl})`,
               }}
             >
               <div className="sec-header">
@@ -283,7 +285,7 @@ const HomePage = () => {
               </div>
               <div className="upon-image-wrap">
                 <img
-                  src={homePage.home.section5Image.mediaItemUrl}
+                  src={homePage.home.section5Image?.mediaItemUrl}
                   alt=""
                   layout="fill"
                 />
@@ -300,7 +302,7 @@ const HomePage = () => {
             </div>
             <div className="testimonial-wrapper">
               <OwlCarousel className="testimonial-slider" {...options}>
-                {allTestimonials.map((item, i) => (
+                {dataTestimonial && allTestimonials.map((item, i) => (
                   <div className="item" key={i+'testi'}>
                     <div className="testimonial-item-inr">
                       <div
@@ -310,7 +312,7 @@ const HomePage = () => {
                       <div className="author-d-wrap">
                         <div className="author-img">
                           <img
-                            src={item.featuredImage.node.mediaItemUrl}
+                            src={item.featuredImage.node?.mediaItemUrl}
                             alt=""
                             layout="fill"
                           />
@@ -340,7 +342,7 @@ const HomePage = () => {
                 <p>{homePage.home.section7Description}</p>
               </div>
               <div className="faq-wrapper">
-                {faqs.map((item, i) => (
+                {dataFaq && faqs.map((item, i) => (
                   <div
                   key={i+'faq'}
                     className={`accordion__item ${
@@ -444,7 +446,8 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-      </main>
+        </main>:<Loader/>
+}
     </>
   )
 }

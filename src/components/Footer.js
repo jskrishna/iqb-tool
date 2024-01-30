@@ -12,7 +12,7 @@ const Footer = ({ footer, menusFooter, currentMenuNameFooter }) => {
         <div className="footer-top">
           <div className="footer-box footer-logo">
           <Link to={`/`}>
-              <img src={footer.logo.mediaItemUrl} alt="" />
+              <img src={footer.logo?.mediaItemUrl} alt="" />
             </Link>
             <p>{footer.belowLogoContent}</p>
           </div>

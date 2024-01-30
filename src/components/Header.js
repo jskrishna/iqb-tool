@@ -36,7 +36,7 @@ const Header = ({ header, menus, currentMenuName }) => {
         <div className="header-inr">
           <div className="navbar-left">
             <Link to={`/`}>
-              <img src={header.logo.mediaItemUrl} alt="" />
+              <img src={header.logo?.mediaItemUrl} alt="" />
             </Link>
           </div>
           {menus.map(

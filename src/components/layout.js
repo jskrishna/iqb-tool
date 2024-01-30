@@ -19,7 +19,7 @@ const Layout = ({ isHomePage, children }) => {
   const { loading, error, data } = useQuery(GET_MENUS, {
     client: client,
   });
-
+console.log(data);
   const { loading:loadingHeader, error:errorHeader, data:dataHeader } = useQuery(GET_HEADER_OPTIONS, {
     client: client,
   });
@@ -38,17 +38,18 @@ const Layout = ({ isHomePage, children }) => {
     },
   });
 
-  if (loading) return <Loader/>;
+  // if (loading) return <Loader/>;
   if (error) return <p>Error: {error.message}</p>;
 
 
   const currentMenuName = menuNames[i18n.language];
-  const menus = data.menus.nodes || [];
+
+  const menus = data?.menus.nodes || [];
 
 
-  if (loadingHeader) return <Loader/>;;
+  // if (loadingHeader) return <Loader/>;;
   if (errorHeader) return <p>Error: {errorHeader.message}</p>;
-const header = dataHeader.allHeader.nodes[0].header;
+const header = dataHeader?.allHeader.nodes[0].header;
 
 
 
@@ -59,23 +60,24 @@ const footerMenuNames = {
 };
 
 
-if (loadingFooter) return <Loader/>;;
+// if (loadingFooter) return <Loader/>;;
 if (errorFooter) return <p>Error: {errorFooter.message}</p>;
 
-const footer = dataFooter.allFooter.nodes[0].footer;
+const footer = dataFooter?.allFooter.nodes[0].footer;
 
-if (loadingMenu) return <Loader/>;
+// if (loadingMenu) return <Loader/>;
 if (errorMenu) return <p>Error: {errorMenu.message}</p>;
 const currentMenuNameFooter = footerMenuNames[i18n.language];
-const menusFooter = dataMenu.menus.nodes || [];
+const menusFooter = dataMenu?.menus.nodes || [];
 
 
 
   return (
     <div className="global-wrapper1" data-is-root-path={isHomePage}>
-      <Header header={header} menus={menus} currentMenuName={currentMenuName} />
+      {data && header && menus? <Header header={header} menus={menus} currentMenuName={currentMenuName} />:""}
+     
       <main>{children}</main>
-      <Footer footer={footer} currentMenuNameFooter={currentMenuNameFooter}  menusFooter={menusFooter} />
+      {footer && currentMenuNameFooter && menusFooter?<Footer footer={footer} currentMenuNameFooter={currentMenuNameFooter}  menusFooter={menusFooter} />:""}
     </div>
   )
 }
