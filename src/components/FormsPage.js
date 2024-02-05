@@ -33,6 +33,7 @@ const FormsPage = () => {
                   <div className="content-wrap">
                     <h2>{item.questionnaireName}</h2>
                     <p>{item.questionnaireDescription}</p>
+                    <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
                     <button className="btn btn-primary">
                       <span>{item.questionnaireButtonText}</span>{" "}
                       <svg
@@ -49,6 +50,7 @@ const FormsPage = () => {
                         />
                       </svg>
                     </button>
+                    </a>
                   </div>
                   <div className="image-wrap">
                     <img

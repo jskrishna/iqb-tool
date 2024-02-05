@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useQuery, useMutation } from "@apollo/client"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import {
+  GoogleReCaptchaProvider,
+  GoogleReCaptcha,
+  useGoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 import {
   GET_CONTACT_FORM,
   GET_CONTACT_PAGE,
@@ -14,6 +19,28 @@ export default function ContactPage() {
   const [formData, setFormData] = useState([])
   const [errors, setError] = useState({})
   const [msg, setMsg] = useState({ success: "", error: "" })
+  const [formSubmitLoading, setFormSubmitLoading] = useState(false);
+  const [isVerified, setVerified] = useState(false);
+//  const { executeRecaptcha } = useGoogleReCaptcha();
+  
+  // const onChange = (value) => {
+  //   if (value) {
+  //     setVerified(true);
+  //   }
+  // };
+  // const handleReCaptchaVerify = useCallback(async () => {
+  //   if (!executeRecaptcha) {
+  //     console.log("Execute recaptcha not yet available");
+  //     return;
+  //   }
+  //   const token = await executeRecaptcha("yourAction");
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!isVerified) {
+  //     handleReCaptchaVerify();
+  //   }
+  // }, [handleReCaptchaVerify]);
 
   useEffect(() => {
     if (msg.success !== "" || msg.error !== "") {
@@ -79,6 +106,7 @@ export default function ContactPage() {
   }
 
   useEffect(() => {
+
   }, [formData])
 
   const { loading, error, data } = useQuery(GET_CONTACT_PAGE, {
@@ -107,24 +135,33 @@ console.log(data);
   const onSubmit = async (event) => {
     event.preventDefault();
     let form = document.getElementById("myForm")
-    let checkValidations = checkValidation(ContactForm, formData, setError)
+   
+    let checkValidations = checkValidation(ContactForm, formData, setError);
     if (checkValidations) {
+      setFormSubmitLoading(true);
       let msgNew = msg
       try {
         const result = await submitForm({
           variables: {
             input: {
-              formId: 1,
+              formId: i18n.language?.toUpperCase() === "NL" ? 2 : 1,
               data: formData,
             },
           },
         })
         if (result.data.submitForm.success) {
-          form.reset()
-          msgNew.success = "Message sent successfully!"
+          form.reset();
+          let msgNewTranslateSuc = i18n.language?.toUpperCase() === "NL" ? "Bericht succesvol verzonden" : "Message sent successfully!";
+          msgNew.success = msgNewTranslateSuc;
+             
+
+          setFormSubmitLoading(false);
+          setFormData([]);
         }
       } catch (error) {
-        msgNew.error = "Error submitting form!"
+        let msgNewTranslateError = i18n.language?.toUpperCase() === "NL" ? "Fout bij verzenden van formulier!" : "Error submitting form!";
+        msgNew.error = msgNewTranslateError;
+        setFormSubmitLoading(false);
       }
       setMsg(msgNew)
     }
@@ -265,13 +302,23 @@ console.log(data);
                             )}
                           </>
                         ) : field.__typename === "SubmitField" ? (
-                          <button
-                            onClick={(e) => onSubmit(e)}
-                            type="submit"
-                            className="btn btn-primary w-100"
-                          >
-                            Send a message
-                          </button>
+                          formSubmitLoading ?  <button
+                          type="button"
+                          className="btn btn-primary w-100"
+                        >
+                         {i18n.language?.toUpperCase() === "NL" ? "Bezig met verzenden..." : "Sending..." }
+                          
+                         {/* <div className="dot-falling"></div> */}
+                        </button> : <button
+                          onClick={(e) => onSubmit(e)}
+                          type="submit"
+                          className="btn btn-primary w-100"
+                        >
+                          
+                          {i18n.language?.toUpperCase() === "NL" ? "Stuur een bericht" : "Send a message" }
+                        </button>
+                        
+                      
                         ) : null}
                       </div>
                     ))}
@@ -281,6 +328,7 @@ console.log(data);
                   ) : (
                     <span className="error">{msg.error}</span>
                   )}
+            
                 </div>
               </div>
             </div>

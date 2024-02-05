@@ -937,7 +937,9 @@ h6 {
     right: 0;
     bottom: -85px;
 }
-
+.about-img-wrap .img-1 {
+    min-height: 360px;
+}
 .icon-list li {
     position: relative;
     padding-left: 35px;

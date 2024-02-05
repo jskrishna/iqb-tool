@@ -132,6 +132,7 @@ const AboutPage = () => {
             ))}
           </div>
           <div className="useful-btn-wrap">
+          <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
             <button className="btn btn-primary">
               <span>{aboutPage.aboutUs.section3ButtonText}</span>
               <svg
@@ -148,6 +149,7 @@ const AboutPage = () => {
                 ></path>
               </svg>
             </button>
+            </a>
           </div>
         </div>
       </section>
@@ -204,9 +206,10 @@ const AboutPage = () => {
                 onChange={e => setEmail(e.target.value)}
                 placeholder={aboutPage.aboutUs.section5EmailPlaceholder}
               />
+    <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
               <button
                 className="btn btn-primary"
-                onClick={() => handleSubscribe()}
+                // onClick={() => handleSubscribe()}
               >
                 <span>{aboutPage.aboutUs.section5ButtonText}</span>
                 <svg
@@ -229,6 +232,7 @@ const AboutPage = () => {
                   </defs>
                 </svg>
               </button>
+              </a>
             </div>
             {subscribed.success && (
               <span className="success">{subscribed.success}</span>

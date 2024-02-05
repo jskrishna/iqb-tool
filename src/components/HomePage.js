@@ -173,9 +173,11 @@ const HomePage = () => {
                 <h1>{homePage.home.section1Heading2}</h1>
                 <p>{homePage.home.section1Description}</p>
                 <div className="banner-btn-wrap">
+                <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
                   <button className="btn btn-primary">
-                    <span>{homePage.home.section1ButtonText}</span>
+                    {homePage.home.section1ButtonText}
                   </button>
+                  </a>
                 </div>
               </div>
               <div className="banner-right">
@@ -222,8 +224,9 @@ const HomePage = () => {
                     <div className="content-wrap">
                       <h2>{item.questionnaireName}</h2>
                       <p>{item.questionnaireContent}</p>
+                      <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
                       <button className="btn btn-primary">
-                        <span>{item.questionnaireButtonText}</span>{" "}
+                     {item.questionnaireButtonText}{" "}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="9"
@@ -238,6 +241,7 @@ const HomePage = () => {
                           />
                         </svg>
                       </button>
+                      </a>
                     </div>
                     <div className="image-wrap">
                       <img
@@ -265,8 +269,9 @@ const HomePage = () => {
                 <h2 className="secHeading">{homePage.home.section5Heading2}</h2>
                 <p>{homePage.home.section5Description}</p>
                 <div className="upon-btn-wrap">
+                <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
                   <button className="btn btn-white">
-                    <span>{homePage.home.section5ButtonText}</span>
+                 {homePage.home.section5ButtonText}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="9"
@@ -281,6 +286,7 @@ const HomePage = () => {
                       />
                     </svg>
                   </button>
+                  </a>
                 </div>
               </div>
               <div className="upon-image-wrap">
@@ -411,9 +417,10 @@ const HomePage = () => {
                   onChange={e => setEmail(e.target.value)}
                   placeholder={homePage.home.section8FormPlaceholder}
                 />
+                <a href={`https://login.iqb-tool.com/request-access`+'?lang='+i18n.language?.toUpperCase()}>
                 <button
                   className="btn btn-primary"
-                  onClick={() => handleSubscribe()}
+                  // onClick={() => handleSubscribe()}
                 >
                   <span>{homePage.home.section8ButtonText}</span>
                   <svg
@@ -436,6 +443,7 @@ const HomePage = () => {
                     </defs>
                   </svg>
                 </button>
+                </a>
               </div>
               {subscribed.success && (
                 <span className="success">{subscribed.success}</span>
