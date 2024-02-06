@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { useQuery } from "@apollo/client"
 import { useTranslation } from "react-i18next"
@@ -56,10 +56,15 @@ const partnerOptions = {
 }
 
 const HomePage = () => {
-  const { i18n } = useTranslation()
-  const [email, setEmail] = useState("")
-  const [subscribed, setSubscribed] = useState({ success: "", error: "" })
-  let faqs = []
+  
+
+  const { i18n } = useTranslation();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState({ success: "", error: "" });
+  let faqs = [];
+
+
+
 
   const handleSubscribe = async () => {
     addToMailchimp(email) // listFields are optional if you are only capturing the email address.
@@ -306,9 +311,9 @@ const HomePage = () => {
               <h2 className="secHeading">{homePage.home.section6Heading2}</h2>
               <p>{homePage.home.section6Description}</p>
             </div>
-            <div className="testimonial-wrapper">
+            {dataTestimonial ?   <div className="testimonial-wrapper">
               <OwlCarousel className="testimonial-slider" {...options}>
-                {dataTestimonial && allTestimonials.map((item, i) => (
+                {allTestimonials.map((item, i) => (
                   <div className="item" key={i+'testi'}>
                     <div className="testimonial-item-inr">
                       <div
@@ -336,7 +341,8 @@ const HomePage = () => {
                   </div>
                 ))}
               </OwlCarousel>
-            </div>
+            </div>:""}
+          
           </div>
         </section>
         <section className="faq-sec">
