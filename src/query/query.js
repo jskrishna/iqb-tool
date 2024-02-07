@@ -238,6 +238,30 @@ export const GET_ABOUT_PAGE = gql`
   }
 `
 
+
+export const GET_PRICINGPLANS_PAGE = gql`
+query NewQuery($language: LanguageCodeFilterEnum = EN) {
+  pages(where: {language: $language, name: "pricing-plans"}) {
+    nodes {
+      pricingPlans {
+        heading
+        pricingPlans {
+          buttonText
+          buttonUrl
+          content
+          exportProfilesPj
+          fieldGroupName
+          noOfUsers
+          price
+          type
+          validity
+          viewsProfilePerYear
+        }
+      }
+    }
+  }
+}`
+
 export const GET_FOOTER_OPTIONS = gql`
   query NewQuery($languages: [LanguageCodeEnum!] = EN) {
     allFooter(where: { languages: $languages }) {

@@ -103,6 +103,15 @@
         width: 54px;
         height: 54px;
     }
+    .plan-price h2 {
+        font-size: 28px;
+    }
+    .plan-box {
+        width: calc(25% - 12px);
+    }
+    .plan-wrapper {
+        gap: 12px;
+    }
 }
 
 @media(min-width:1025px) {
@@ -112,6 +121,9 @@
 }
 
 @media (max-width: 1024px) {
+    .plan-box {
+        width: calc(50% - 6px);
+    }
     .header-inr {
         padding: 15px 0;
     }
@@ -302,6 +314,12 @@
 }
 
 @media(max-width:767px) {
+    .plan-wrapper {
+        gap: 20px;
+    }
+    .plan-box {
+        width: calc(100% - 6px);
+    }
     .contact-right-inr h3 {
         font-size: 25px;
         line-height: 32px;
