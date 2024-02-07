@@ -32,11 +32,11 @@ const options = {
 }
 
 const partnerOptions = {
-  loop: false,
+  loop: true,
   nav: false,
   items: 5,
   margin: 20,
-  dots: false,
+  dots: true,
   autoplayHoverPause: true,
   autoplay: false,
   responsive: {
@@ -342,7 +342,6 @@ const HomePage = () => {
                 ))}
               </OwlCarousel>
             </div>:""}
-          
           </div>
         </section>
         <section className="faq-sec">

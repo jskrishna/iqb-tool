@@ -1143,3 +1143,66 @@ textarea.form-control {
     border-radius: 25px;
     padding: 70px;
 }
+
+.plan-wrapper {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.plan-box {
+    width: calc(25% - 20px);
+    height: 100%;
+    max-width: 305px;
+    border-radius: 20px;
+    box-shadow: -2px 56px 96px 0px rgba(51, 51, 255, 0.05);
+    padding: 1px;
+    background: linear-gradient(rgba(175, 182, 229, 1), rgba(208, 194, 255, 0));
+}
+.plan-box-inr {
+    padding: 30px 25px;
+    background: #fff;
+    border-radius: 20px;
+}
+.plan-title {
+    color: #1367FF;
+    font-size: 25px;
+}
+.plan-price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 0;
+}
+.plan-price p {
+    margin: 0;
+}
+.plan-price h2 {
+    font-size: 32px;
+}
+.plan-dtl p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    margin: 0;
+}
+.plan-btn {
+    margin: 20px 0;
+}
+.plan-dtl-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.custom-section.plan-page-sec {
+    padding-top: 0;
+}
+.plan-dtl-list li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.plan-dtl-list li img {
+    width: 16px;
+    height: 16px;
+}

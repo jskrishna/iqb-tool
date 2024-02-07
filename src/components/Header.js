@@ -67,7 +67,7 @@ const Header = ({ header, menus, currentMenuName }) => {
                             {getChildren(menu.menuItems.nodes, item.id)
                               .length ? (
                               <svg
-                                class="icon"
+                                className="icon"
                                 width="14"
                                 height="16"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +204,7 @@ const Header = ({ header, menus, currentMenuName }) => {
                                 {getChildren(menu.menuItems.nodes, item.id)
                                   .length ? (
                                   <svg
-                                    class="icon"
+                                    className="icon"
                                     width="14"
                                     height="16"
                                     xmlns="http://www.w3.org/2000/svg"

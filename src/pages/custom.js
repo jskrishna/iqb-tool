@@ -6,10 +6,10 @@ import Layout from '../components/layout';
 import CustomPage from '../components/CustomPage';
 
 
-const About = () => (
+const Custom = () => (
   <ApolloProvider client={client}>
      <Layout children={<CustomPage />}/>
   </ApolloProvider>
 );
 
-export default About;
+export default Custom;
