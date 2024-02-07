@@ -47,7 +47,8 @@ main {
     min-height: calc(100vh - 360px);
 }
 
-a, button {
+a,
+button {
     outline: none;
 }
 
@@ -199,7 +200,8 @@ a label {
     align-items: center;
 }
 
-.navbar-center>ul>li>a, .navbar-center>ul>li>ul>li>a {
+.navbar-center>ul>li>a,
+.navbar-center>ul>li>ul>li>a {
     padding: 23px 20px;
     color: rgba(14, 11, 61, 0.75);
     font-weight: 500;
@@ -233,14 +235,14 @@ a label {
     top: 150%;
 }
 
-.navbar-center>ul>li:hover .subMenu{
+.navbar-center>ul>li:hover .subMenu {
     visibility: visible;
-  opacity: 1;
-  top: 100%;
+    opacity: 1;
+    top: 100%;
 }
 
 .navbar-center>ul>li>svg {
-transition: 300ms all;
+    transition: 300ms all;
 }
 
 .navbar-center>ul>li:hover svg {
@@ -937,9 +939,11 @@ h6 {
     right: 0;
     bottom: -85px;
 }
+
 .about-img-wrap .img-1 {
     min-height: 360px;
 }
+
 .icon-list li {
     position: relative;
     padding-left: 35px;
@@ -1065,7 +1069,7 @@ textarea.form-control {
     margin-bottom: 20px;
 }
 
-.form-group:last-child{
+.form-group:last-child {
     margin-bottom: 0;
 }
 
@@ -1139,7 +1143,7 @@ textarea.form-control {
 }
 
 .content-page-inr {
-    background: linear-gradient(280deg,#f7f9fc 67.03%,#f7f9fc 0,#fff 91.23%);
+    background: linear-gradient(280deg, #f7f9fc 67.03%, #f7f9fc 0, #fff 91.23%);
     border-radius: 25px;
     padding: 70px;
 }
@@ -1150,6 +1154,7 @@ textarea.form-control {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 .plan-box {
     width: calc(25% - 20px);
     height: 100%;
@@ -1159,50 +1164,63 @@ textarea.form-control {
     padding: 1px;
     background: linear-gradient(rgba(175, 182, 229, 1), rgba(208, 194, 255, 0));
 }
+
 .plan-box-inr {
     padding: 30px 25px;
     background: #fff;
     border-radius: 20px;
 }
+
 .plan-title {
     color: #1367FF;
     font-size: 25px;
 }
+
 .plan-price {
     display: flex;
     align-items: center;
     gap: 5px;
     padding: 15px 0;
 }
+
 .plan-price p {
     margin: 0;
 }
+
 .plan-price h2 {
     font-size: 32px;
 }
+
 .plan-dtl p {
     font-size: 16px;
     font-weight: 400;
     line-height: 27px;
     margin: 0;
 }
+
 .plan-btn {
     margin: 20px 0;
 }
+
 .plan-dtl-list ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
+
 .custom-section.plan-page-sec {
     padding-top: 0;
 }
+
 .plan-dtl-list li {
     display: flex;
-    align-items: center;
     gap: 7px;
+    font-size: 15px;
+    line-height: 24px;
 }
-.plan-dtl-list li img {
-    width: 16px;
-    height: 16px;
+
+.plan-dtl-list li svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
 }
