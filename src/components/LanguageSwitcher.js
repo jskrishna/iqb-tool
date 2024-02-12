@@ -12,6 +12,7 @@ const LanguageSwitcher = () => {
     window.history.replaceState({}, '', currentUrl.pathname);
 
     i18n.changeLanguage(lng);
+    localStorage.setItem('lang',lng);
   };
 
 

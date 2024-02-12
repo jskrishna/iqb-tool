@@ -169,13 +169,14 @@ const AboutPage = () => {
                       dangerouslySetInnerHTML={{ __html: item.content }}
                     ></div>
                     <div className="author-d-wrap">
+                    {item.featuredImage ? 
                       <div className="author-img">
                         <img
                           src={item.featuredImage.node?.mediaItemUrl}
                           alt=""
                           layout="fill"
                         />
-                      </div>
+                      </div> : ""}
                       <div className="author-detail">
                         <h4>{item.title}</h4>
                         <div

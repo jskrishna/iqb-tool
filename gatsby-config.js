@@ -30,7 +30,7 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         // the only required plugin option for WordPress is the GraphQL url.
-        url:`https://patidarparivar.com/graphql`,
+        url:`https://iqb-tool.com/wp/graphql`,
         useACF: true, // Enable ACF support
       },
     },

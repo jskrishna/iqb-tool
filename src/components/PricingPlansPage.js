@@ -34,8 +34,8 @@ console.log(pricingPage);
     <div className="plan-box-inr">
     <h3 className="plan-title">{item.type}</h3>
     <div className="plan-price">
-      <h2>{item.price}</h2>
-      <p>{item.validity}</p>
+      <h2 dangerouslySetInnerHTML={{ __html: item.price }}></h2>
+      <p dangerouslySetInnerHTML={{ __html: item.validity }}></p>
     </div>
     <div className="plan-dtl" dangerouslySetInnerHTML={{ __html: item.content }}>
     </div>
@@ -46,7 +46,7 @@ console.log(pricingPage);
     </div>
     <div className="plan-dtl-list">
       <ul>
-        <li>
+        {item.noOfUsers ?     <li>
           {item.noOfUsers == 'Unlimited access' || item.noOfUsers == 'Onbeperkt toegang' ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,26 +57,23 @@ console.log(pricingPage);
 <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>}
         
-
-
-
-
         <label>{item.noOfUsers}</label>
-        </li>
-        <li>
+        </li>:""}
+    {item.viewsProfilePerYear ?  <li>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M17 9L10.125 16L7 12.8182" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
         <label>{item.viewsProfilePerYear}</label>
-        </li>
+        </li>:""}
+        {item.exportProfilesPj ?
         <li>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M17 9L10.125 16L7 12.8182" stroke="#1367FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
         <label>{item.exportProfilesPj}</label>
-        </li>
+        </li> :""}
       </ul>
     </div>
   </div>
